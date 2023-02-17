@@ -11,6 +11,7 @@
 // ==/UserScript==
 
 //disable all occurences of "white-space: nowrap;" within TDs because it is stupid
+//
 
 waitForKeyElements('table[id="table886"]', doIt);
 waitForKeyElements('table[id="ctl02_grdTickets"]', doIt);
