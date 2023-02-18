@@ -11,4 +11,4 @@
 // @run-at       document-idle
 // ==/UserScript==
 
-console.log("********* FART ************");
+console.log("********* FART2 ************");
