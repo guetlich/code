@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Copy Buttons
 // @namespace    https://it.cornell.edu/
-// @version      5
+// @version      6
 // @description  SFInfo Copy Buttons
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/vserver.php?*
@@ -10,66 +10,13 @@
 // @run-at       document-end
 // ==/UserScript==
 
-console.log("********* FART3 ************");
-
-/*
-
-[*]
-
-<a href='' onclick=
-
-*/
-
 function copy_this(e) {
     
-    //was ctrl ctrl?
-
     if ((e.shiftKey) && (e.target.tagName === "TD")) { 
         let g = e.target.innerText;
         if (g !== undefined)
             GM_setClipboard(g, 'text/plain');
     }
-/*
-    let f = e.target.tagName;
-    
-
-    
-    //if (f === undefined || g === undefined) { return; } 
-
-   
-        
-    if ((f === "TD") && (g !== undefined)) {
-
-        console.log(" FART " + g );
-        //GM_setClipboard(f);
-    }
-    */
 }
 
 window.addEventListener("click", copy_this);
-/*
-GM_setClipboard
-
-Sets data to system clipboard.
-
-GM_setClipboard(data, type)
-
-    data: string
-
-    The data to be copied to system clipboard.
-    type: string = 'text/plain'
-
-    The MIME type of data to copy.
-*/
-
-//let element1 = GM_addElement(tagName, attributes);
-//let element2 = GM_addElement(parentNode, tagName, attributes);
-/*
-GM_addElement(
-    document.getElementsByTagName('div')[0],
-    'img', 
-    { 
-        src: 'https://example.com/image.png' 
-    }
-    );
-*/
