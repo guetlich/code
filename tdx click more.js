@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           TDX click "more" button
 // @namespace      https://it.cornell.edu
-// @version        34
+// @version        37
 // @description    TDX click "more" button for me b/c it shouldn't exist like AT ALL
 // @author         Holly Klimowicz <hek52@cornell.edu>
 // @match          https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID=*
@@ -12,22 +12,24 @@
 // ==/UserScript==
 
 
-waitForKeyElements('div[class="moreToggle"]', doIt);
+waitForKeyElements('div[class="moreToggle"]', doMore);
+waitForKeyElements('div[class="lessToggle"]', doLess);
 
+function doMore(e) {
 
-function doIt(e) {
-
-    //there should only be one of these
     let elements = document.getElementsByClassName('moreToggle');
-    //console.log("**** LENGTH " + elements[0].children.length);
-    let kiddies = elements[0].children[1].children; //sloppy AND ugly BUT it works so there
+    let subbies = elements[0].children[1].children; //sloppy AND ugly BUT it works so there
 
-    for (let i = 0; i < kiddies.length; i++) {
-
-        if ((kiddies[i].tagName === 'BUTTON') && (kiddies[i].innerText.trim() === 'More')) {
-            //console.log("**** YUP ****" + kiddies[i].innerText);
-            kiddies[i].click();
-            break;
+    for (let i = 0; i < subbies.length; i++) {
+        if ((subbies[i].tagName === 'BUTTON') && (subbies[i].innerText.trim() === 'More')) {
+            subbies[i].click();
+            return;
         }
     }
+
+}
+
+function doLess(e) {
+    let elements = document.getElementsByClassName('lessToggle');
+    elements[0].children[1].children[0].style.display = 'none'; //brittle but eff it
 }
