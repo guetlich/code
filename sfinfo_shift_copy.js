@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo shift + copy
 // @namespace    https://it.cornell.edu/
-// @version      18
+// @version      19
 // @description  shift + click to copy text anywhere in SFInfo
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
