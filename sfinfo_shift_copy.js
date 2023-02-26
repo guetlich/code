@@ -49,6 +49,7 @@ function copy_this(e) {
             GM_setClipboard(g.trim(), 'text/plain');
         }
     }
+
 }
 
 /* key handlers */
