@@ -40,7 +40,7 @@ var icon = GM_addElement(icon_div, 'img',
 /* functions */
 
 function copy_this(e) {
-    
+
     if (e.shiftKey) { 
         let g = e.target.innerText;
         if (g !== undefined)
@@ -48,6 +48,7 @@ function copy_this(e) {
             window.getSelection().empty(); //double lol
             GM_setClipboard(g.trim(), 'text/plain');
     }
+    
 }
 
 /* key handlers */
