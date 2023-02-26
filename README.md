@@ -1,1 +1,1 @@
-Some of the things that make life easier.
+I like to make things. Sometimes they're useful.
