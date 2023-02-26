@@ -43,12 +43,12 @@ function copy_this(e) {
 
     if (e.shiftKey) { 
         let g = e.target.innerText;
-        if (g !== undefined)
+        if (g !== undefined) { 
             e.preventDefault(); //lol
             window.getSelection().empty(); //double lol
             GM_setClipboard(g.trim(), 'text/plain');
+        }
     }
-    
 }
 
 /* key handlers */
