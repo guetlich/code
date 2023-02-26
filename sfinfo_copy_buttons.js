@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Copy Buttons
 // @namespace    https://it.cornell.edu/
-// @version      13
+// @version      16
 // @description  shift + click to copy TDs anywhere in SFInfo
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -40,9 +40,11 @@ var icon = GM_addElement(icon_div, 'img',
 /* functions */
 
 function copy_this(e) {
-    if ((e.shiftKey) && (e.target.tagName === "TD")) { 
-        let g = e.target.innerText;
+    
+    if (e.shiftKey) { 
+        let g = e.target.innerText.trim();
         if (g !== undefined)
+            e.preventDefault() //lol
             GM_setClipboard(g, 'text/plain');
     }
 }
