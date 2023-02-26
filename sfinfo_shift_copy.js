@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo shift + copy
 // @namespace    https://it.cornell.edu/
-// @version      19
+// @version      20
 // @description  shift + click to copy text anywhere in SFInfo
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -21,7 +21,7 @@ let css=`.cornerIcon {
     left: 0;
     width: 32px;
     height: 32px;
-    cursor: pointer;`;
+    cursor: none;`;
 GM_addStyle(css);
 
 //create our new div
