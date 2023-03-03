@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Colour Barf
 // @namespace    https://it.cornell.edu/
-// @version      3
+// @version      4
 // @description  Make SFInfo look like a rainbow threw up on it
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -10,23 +10,14 @@
 // @run-at       document-end
 // ==/UserScript==
 
-//waitforkeyelements requires jqeury btw
-
 let css=`th, td {
     padding: 2px;}`
   GM_addStyle(css);
 
-
 const colours = ["Tomato", "Orange", "Yellow", "ForestGreen", "CornflowerBlue", "Plum", "Orchid"];
 var c = 0;
 
-
-const tds = document.getElementsByTagName("td");
-//const ths = document.getElementsByTagName("th")
-//const stuff = [].concat(tds, ths);
-const stuff = tds;
-  
-  
+const stuff = document.getElementsByTagName("td");
   
 for (var i=0; i<stuff.length; i++) {
 
@@ -34,18 +25,5 @@ for (var i=0; i<stuff.length; i++) {
         if (!stuff[i].bgColor)
             stuff[i].bgColor = colours[c++ % colours.length];
     }
-  
-    
 
-    /* cute first try
-      if (tds[i].innerText === "FQDN:") tds[i].bgColor = "Tomato";
-      if (tds[i].innerText === "ServInfo Name:") tds[i].bgColor = "orange";
-      if (tds[i].innerText === "OS:") tds[i].bgColor = "yellow";
-      if (tds[i].innerText === "Build Date:") tds[i].bgColor = "ForestGreen";
-      if (tds[i].innerText === "Decommission Date:") tds[i].bgColor = "CornflowerBlue";
-      if (tds[i].innerText === "Service Type:") tds[i].bgColor = "Plum";
-      if (tds[i].innerText === "Billing Delay (Hosting Only):") tds[i].bgColor = "Orchid";
-    */
 }
-  
-  
