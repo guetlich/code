@@ -101,14 +101,27 @@ function doIt(e) {
 
 /* key handlers */
 
+// https://www.toptal.com/developers/keycode
+
+
 // shift down
 function key_down(e) {
-    // 16 = shift key
-    if (e.keyCode == 16) {
-        //console.log(" **** SHIFT DOWN ****");
-        //show the thing
-        icon_div.style.display = 'block'; //???
+
+    switch (e.keyCode) {
+        case 16: // 16 = shift key
+            //console.log(" **** SHIFT DOWN ****");
+            //show the thing
+            icon_div.style.display = 'block'; //???
+            break;
+        case 73: // 73 = 'i'
+            //in process
+
+            break;
+        default:
+            console.log("asdfasdf");
+                    
     }
+
 }
 
 // shift up
