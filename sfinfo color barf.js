@@ -20,6 +20,6 @@ var c = 0;
 const stuff = document.getElementsByTagName("td");
   
 for (var i=0; i<stuff.length; i++) 
-    if ( (stuff[i].innerText.endsWith(":")))
+    if (stuff[i].innerText.endsWith(":"))
         if (!stuff[i].bgColor)
             stuff[i].bgColor = colours[c++ % colours.length];
