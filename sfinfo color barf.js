@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Colour Barf
 // @namespace    https://it.cornell.edu/
-// @version      7
+// @version      8
 // @description  Make SFInfo look like a rainbow threw up on it
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -20,13 +20,13 @@ var c = 0;
 const stuff = document.getElementsByTagName("td");
   
 for (var i=0; i<stuff.length; i++) 
-    if ((stuff[i].innerText.endsWith(":")) || (stuff[i].cellIndex == 1))
+    if ((stuff[i].innerText.endsWith(":")) || (stuff[i].cellIndex == 0))
         if (!stuff[i].bgColor)
             stuff[i].bgColor = colours[c++ % colours.length];
 
 const headers = document.getElementsByTagName("th");
 
 for (var j=0; j<headers.length; j++)
-    if (headers[j].rowIndex == 1)
+    if (headers[j].rowIndex == 0)
         if (!headers[j].bgColor)
             headers[j].bgColor = colours[c++ % colours.length];
