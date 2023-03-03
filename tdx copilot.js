@@ -16,19 +16,20 @@
 
 /* CSS + HTML payloads */
 
-let css=`.cornerIcon { 
+let css=`.cornerIconDiv { 
     display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 32px;
     height: 32px;
-    cursor: none;`;
+    cursor: none;
+    background-color: lightblue;`;
 GM_addStyle(css);
 
 //create our new div
 var icon_div = GM_addElement('div',
-    { class: 'cornerIcon' }
+    { class: 'cornerIconDiv' }
 );
 
 //add icon to the div
