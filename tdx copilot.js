@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TDX Copilot
 // @namespace    https://it.cornell.edu/
-// @version      7
+// @version      8
 // @description  TDX Copilot
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID*
