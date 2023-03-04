@@ -4,8 +4,9 @@
 // @version      7
 // @description  TDX Copilot
 // @author       Holly Klimowicz <hek52@cornell.edu>
-// @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID=967797
-// @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/Edit?TicketID=967797
+// @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID*
+// @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/Edit?TicketID=*
+// @match        https://tdx.cornell.edu/TDNext/Home/Desktop/Default.aspx
 // @require      https://raw.githubusercontent.com/guetlich/code/main/support/waitForKeyElements.js
 // @require      https://raw.githubusercontent.com/guetlich/code/main/support/cookies.js
 // @require      https://raw.githubusercontent.com/guetlich/code/main/support/jquery-3.6.3.min.js
@@ -66,9 +67,22 @@ var icon_i = GM_addElement(first_span, 'img',
 //eventually everything turns into a FSM
 //eventually everything becomes EMACS
 //eventually every app evolves to send email please shoot me if that happens
-var t = getCookie("copilot");// ? t : "";
+//var t = getCookie("copilot");// ? t : "";
+var ticketStatus = $('#thTicket_lblStatus').html();
 
-switch(t) {
+//say my name
+//var whoami = getCookie("copilot_name");
+
+if (! getCookie("copilot_name")) {
+    //attempt to find out
+    var whoami = $('span[title="Me"]').parent().text().trim();
+    setCookie("copilot_name", whoami, 2); //sneaky
+} 
+console.log("*** i think your name is " + getCookie("copilot_name"));
+
+//console.log("**** current status = " + currentStatus);
+
+switch(getCookie("copilot")) {
     case 'turboCancel':
         setCookie("copilot", "editTurboCancel", 1);
         $('button:contains("Edit")').click();
@@ -78,8 +92,20 @@ switch(t) {
         setCookie("copilot", "toDetail", 1);
         $("#btnSubmit").closest('form').submit();
         break;
-    case 'assignToMe':
-        console.log("assign to me do something");
+    case 'assignToMee':
+        //setCookie("copilot", "editAssignToMe", 1);
+        //$('button:contains("Edit")').click();
+        //break;
+    //case 'editAssignToMe':
+        ////magic happens
+
+        //we don't need to notify ourselves
+        //$('[name="Item.NotifyResponsible"]').prop( "checked", false );
+        //setCookie("copilot", "toDetail", 1);
+
+        $('#btnActions').click();
+        //$('#upMyWork').click();
+        //$("#btnSubmit").closest('form').submit();
         break;
     case 'inProcess':
         console.log("in process do something");
@@ -131,33 +157,42 @@ $('button:contains("Print View")').hide();
 //TODO: i want a pony too
 
 // TURBO CANCEL MONKEY-FIGHTER
-var thing0 = document.createElement ('li');
-thing0.innerHTML = `<button id="turboCancel" type="button" class="btn btn-secondary btn-sm" title="TurboCancel">
- <span class="hidden-xs padding-left-xs">Turbo Cancel</span>
- </button>`;
-//$("#btnRefresh").parent().parent().append(thing0);
-$("#btnRefresh").closest('ul').append(thing0);
+//turbo cancel & in process should only be an option if the ticket status is new
+if (ticketStatus === "New") {
+    var thing0 = document.createElement('li');
+    thing0.innerHTML = `<button id="turboCancel" type="button" class="btn btn-secondary btn-sm" title="TurboCancel">
+    <span class="hidden-xs padding-left-xs">Turbo Cancel</span>
+    </button>`;
+    //$("#btnRefresh").parent().parent().append(thing0);
+    $("#btnRefresh").closest('ul').append(thing0);
+}
+
+if ((ticketStatus === "New") || (ticketStatus === "Resolved")) {
+    // in process
+    var thing2 = document.createElement('li');
+    thing2.innerHTML = `<button id="inProcess" type="button" class="btn btn-secondary btn-sm" title="InProcess">
+    <span class="hidden-xs padding-left-xs">In Process</span>
+    </button>`;
+    $("#btnRefresh").closest('ul').append(thing2);
+
+}
 
 // assign to me
-var thing1 = document.createElement ('li');
+var thing1 = document.createElement('li');
 thing1.innerHTML = `<button id="assignToMe" type="button" class="btn btn-secondary btn-sm" title="AssignToMe">
  <span class="hidden-xs padding-left-xs">Assign to Me</span>
  </button>`;
 $("#btnRefresh").closest('ul').append(thing1);
 
-// in process
-var thing2 = document.createElement ('li');
-thing2.innerHTML = `<button id="inProcess" type="button" class="btn btn-secondary btn-sm" title="InProcess">
- <span class="hidden-xs padding-left-xs">In Process</span>
- </button>`;
-$("#btnRefresh").closest('ul').append(thing2);
-
 // resolve
-var thing3 = document.createElement ('li');
-thing3.innerHTML = `<button id="resolve" type="button" class="btn btn-secondary btn-sm" title="Resolve">
- <span class="hidden-xs padding-left-xs">Resolve</span>
- </button>`;
-$("#btnRefresh").closest('ul').append(thing3);
+// resolve should only be an option if the ticket status is In Process
+if ((ticketStatus === "In Process") || (ticketStatus === "New")) {
+    var thing3 = document.createElement('li');
+    thing3.innerHTML = `<button id="resolve" type="button" class="btn btn-secondary btn-sm" title="Resolve">
+    <span class="hidden-xs padding-left-xs">Resolve</span>
+    </button>`;
+    $("#btnRefresh").closest('ul').append(thing3);
+}
 
 /* functions */
 
@@ -226,8 +261,15 @@ function turbo_cancel(e) {
 //assign to me
 function assign_to_me(e) {
     console.log("entry assign to me");
-    setCookie("copilot", "assignToMe", 1);
-    location.reload();
+    //setCookie("copilot", "assignToMe", 1);
+    //prevent alert box
+    /*
+    $('#btnTakeTicket').prop("onclick", null);//.off("click"); //oy
+    $('#btnActions').click();
+    $('#btnTakeTicket').click();
+    */
+    __doPostBack('btnTakeTicket','');
+    //location.reload();
 }
 
 //resolve
@@ -250,12 +292,18 @@ function in_process(e) {
 window.addEventListener("keydown", key_down);
 window.addEventListener("keyup", key_up);
 
-//clever AND janky!
-if (document.getElementById("btnRefresh")) {
+
+if (document.getElementById("turboCancel"))
     document.getElementById("turboCancel").addEventListener("click", turbo_cancel);
+
+if (document.getElementById("assignToMe"))
     document.getElementById("assignToMe").addEventListener("click", assign_to_me);
+
+if (document.getElementById("inProcess"))
     document.getElementById("inProcess").addEventListener("click", in_process);
+
+if (document.getElementById("resolve"))
     document.getElementById("resolve").addEventListener("click", resolve);
-}
+
 
 //window.addEventListener("click", doIt);
