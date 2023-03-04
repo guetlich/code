@@ -68,7 +68,7 @@ switch(t) {
 /* remove useless Print button */
 
 //find the NoPrint div, then the button inside it, then hide that useless thing
-$(".NoPrint").find("button:contains('Print View')").style.display = "none";
+//$(".NoPrint").find("button:contains('Print View')").style.display = "none";
 
 /* add better buttons */
 
