@@ -108,15 +108,16 @@ function doIt(e) {
 // shift down
 function key_down(e) {
 
+    //if a match is already found, subsequent case clause values will not be evaluated, even when they will be visited by fall-through.
     switch (e.keyCode) {
         case 16: // 16 = shift key
             //console.log(" **** SHIFT DOWN ****");
             //show the thing
-            icon_div.style.display = 'block'; //???
+            icon_div.style.display = 'block'; 
             break;
         case 73: // 73 = 'i'
             //in process
-
+            console.log("something");
             break;
         default:
             console.log("asdfasdf");
