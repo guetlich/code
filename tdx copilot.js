@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TDX Copilot
 // @namespace    https://it.cornell.edu/
-// @version      5
+// @version      6
 // @description  TDX Copilot
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID=*
@@ -16,7 +16,8 @@
 
 /* CSS + HTML payloads */
 
-let css=`.cornerIconDiv { 
+//eff ewe
+let css=`.cornerIconDiv {
     display: none;
     position: fixed;
     top: 0;
@@ -24,7 +25,9 @@ let css=`.cornerIconDiv {
     width: 32px;
     height: 32px;
     cursor: none;
-    background-color: lightblue;`;
+    background-color: burlywood;
+    z-index: 100;
+    position: absolute;`;
 GM_addStyle(css);
 
 //create our new div
@@ -39,6 +42,13 @@ var icon = GM_addElement(icon_div, 'img',
         src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAGNQTFRFj4W+XW97ZX2G7msA7mwIs3xb7XIb73MN8HQA8HUugpCWe5Od8nwC73s69YAJ84Ik9oQc9IQv+4kA9oc59Is++I0s+Y8XxJl4+pAk/JUL+ZU5/qQa/6Uo/6c1/qs+/atO/qxHv0Ao3QAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAABMElEQVQ4y7WS0ZKDIAxFo7SKSguNirqi9v+/chNdFbCzb804QyY5JDdBgNDqGv43pb4EnI2N+hCERqlmddzs6Fvdl5IPv7AGeLvD3gBPKbwWWiszOc8mI7MsUGE4PG8iqY8bZCST7o/LPsUyDmjDPPUfjd4BrRDxJwCo6KJZKQNa5j1iHwETX9TzOM6tzAEsYlSAj9Z1ZdnZnH0MVMwbMHdVVaV3GwAvRUYV+BjLCiBNUJCRzBsdD6gp8fwDXAiIFQhbpGmaRC0CkfaeUD7bgP46psxpOpuL7DLmtihJCUFvSESL0a551YpLMwCZvKyaHmvAdgfofvxYYIYtyAD1R8yDtDarvtOsFIWPKNbX90eaJsyE98s1xK+O5Wfe5i+OLbKdrrh9CPrmF/4SUBRR4Bd3/BoXPComPwAAAABJRU5ErkJggg==',
     }
 );
+
+var icon_i = GM_addElement(icon_div, 'img',
+    {
+        src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAA9QTFRFAAAAAAAAMDAwoKCg////aH9gHwAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAAAQ0lEQVQoz2NgMEYBDAzMqAIGIAUuMOAMUmJsbAIXcIEIIPggJUQKGA8SAZchIoAR6hjxAhdxNoYJoEQuhgBGZKMnBwD7ingdHGtM+AAAAABJRU5ErkJggg==',
+    }
+);
+
 
 /* where are we, and we are we doing right now? */
 var t = getCookie("copilot") ? t : "";
@@ -90,11 +100,11 @@ switch(t) {
 
 function doIt(e) {
 
-    if (e.shiftKey) { 
+    if (e.shiftKey) {
         let g = e.target.innerText;
-        if (g !== undefined) { 
+        if (g !== undefined) {
             e.preventDefault(); //lol
-            
+
         }
     }
 
@@ -111,17 +121,21 @@ function key_down(e) {
     //if a match is already found, subsequent case clause values will not be evaluated, even when they will be visited by fall-through.
     switch (e.keyCode) {
         case 16: // 16 = shift key
-            //console.log(" **** SHIFT DOWN ****");
+            console.log(" **** SHIFT DOWN ****");
             //show the thing
-            icon_div.style.display = 'block'; 
+            icon_div.style.display = 'block';
             break;
         case 73: // 73 = 'i'
             //in process
-            console.log("something");
+            if (e.shiftKey) {
+                console.log("shift + i");
+            } else {
+                console.log("just i");
+            }
             break;
         default:
             console.log("asdfasdf");
-                    
+
     }
 
 }
@@ -130,7 +144,7 @@ function key_down(e) {
 function key_up(e) {
     //16 = shift key
     if (e.keyCode == 16) {
-        //console.log(" **** SHIFT UP ****");
+        console.log(" **** SHIFT UP ****");
         //hide the thing
         icon_div.style.display = 'none';
     }
