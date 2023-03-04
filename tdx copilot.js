@@ -25,12 +25,15 @@ let css=`/* this is a comment to make the code line up in my IDE */
         position: fixed;
         top: 0;
         left: 0;
-        width: 32px;
-        height: 32px;
+        width: 500px;
+        height: 309px;
         cursor: none;
         background-color: burlywood;
         z-index: 100;
         position: absolute;
+    }
+    .hSpan {
+        display: block;
     }
     .btn-holly {
         background-color: DeepPink;
@@ -44,8 +47,19 @@ var icon_div = GM_addElement('div',
     { class: 'cornerIconDiv' }
 );
 
-var zero_span = GM_addElement(icon_div, 'span', { class: 'zeroSpan' } );
-var first_span = GM_addElement(icon_div, 'span', { class: 'firstSpan' } );
+var zero_span = GM_addElement(icon_div, 'span', { class: 'hSpan' } );
+
+var spans = [];
+const tutes = [
+    '<shift> + a : Assign to yourself',
+    '<shift> + i : Set In Process',
+    '<shift> + r : Resolve',
+    '<shift> + t : Turbo Cancel',
+]
+
+for (var i=0; i<tutes.length; i++) {
+    spans.push(GM_addElement(icon_div, 'span', { class: 'hSpan' } ).innerText = tutes[i]);
+}
 
 //add icon to the div
 var icon = GM_addElement(zero_span, 'img',
@@ -54,13 +68,6 @@ var icon = GM_addElement(zero_span, 'img',
         src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAGNQTFRFj4W+XW97ZX2G7msA7mwIs3xb7XIb73MN8HQA8HUugpCWe5Od8nwC73s69YAJ84Ik9oQc9IQv+4kA9oc59Is++I0s+Y8XxJl4+pAk/JUL+ZU5/qQa/6Uo/6c1/qs+/atO/qxHv0Ao3QAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAABMElEQVQ4y7WS0ZKDIAxFo7SKSguNirqi9v+/chNdFbCzb804QyY5JDdBgNDqGv43pb4EnI2N+hCERqlmddzs6Fvdl5IPv7AGeLvD3gBPKbwWWiszOc8mI7MsUGE4PG8iqY8bZCST7o/LPsUyDmjDPPUfjd4BrRDxJwCo6KJZKQNa5j1iHwETX9TzOM6tzAEsYlSAj9Z1ZdnZnH0MVMwbMHdVVaV3GwAvRUYV+BjLCiBNUJCRzBsdD6gp8fwDXAiIFQhbpGmaRC0CkfaeUD7bgP46psxpOpuL7DLmtihJCUFvSESL0a551YpLMwCZvKyaHmvAdgfofvxYYIYtyAD1R8yDtDarvtOsFIWPKNbX90eaJsyE98s1xK+O5Wfe5i+OLbKdrrh9CPrmF/4SUBRR4Bd3/BoXPComPwAAAABJRU5ErkJggg==',
     }
 );
-
-var icon_i = GM_addElement(first_span, 'img',
-    {
-        src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAA9QTFRFAAAAAAAAMDAwoKCg////aH9gHwAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAAAQ0lEQVQoz2NgMEYBDAzMqAIGIAUuMOAMUmJsbAIXcIEIIPggJUQKGA8SAZchIoAR6hjxAhdxNoYJoEQuhgBGZKMnBwD7ingdHGtM+AAAAABJRU5ErkJggg==',
-    }
-);
-
 
 /* where are we, and we are we doing right now? */
 //TODO: learn a better way to do this : )
@@ -113,15 +120,14 @@ switch(getCookie("copilot")) {
         console.log("in process do something");
         setCookie("copilot", "editInProcess", 1);
         $('button:contains("Edit")').click();
-        break; //i don't know if this ever runs nor what to do if it doesn't
+        break;
     case 'editInProcess':
         //we are now on the edit page, and need to in process this
         console.log("edit page in process");
         $('select[name="attribute40"]').val('86');
         //clear the cookie
         setCookie("copilot", "toDetail", 1);
-        //lastly click save
-        //$('button:contains("Save")').click();
+        //lastly submit
         $("#btnSubmit").closest('form').submit();
         break;
     case 'resolve':
@@ -138,8 +144,7 @@ switch(getCookie("copilot")) {
         $('button:contains("To Detail")').click();
         break;
     case '':
-        console.log("do nothing");
-        //fall through to default until i think of something better
+        //console.log("do nothing");
         break;
     default:
         console.log("!! destroy the cookie !!");
@@ -161,21 +166,21 @@ $('button:contains("Print View")').hide();
 // TURBO CANCEL MONKEY-FIGHTER
 //turbo cancel & in process should only be an option if the ticket status is new
 if (ticketStatus === "New") {
-    var thing0 = document.createElement('li');
-    thing0.innerHTML = `<button id="turboCancel" type="button" class="btn btn-holly btn-sm" title="TurboCancel">
+    var thing = document.createElement('li');
+    thing.innerHTML = `<button id="turboCancel" type="button" class="btn btn-holly btn-sm" title="TurboCancel">
     <span class="hidden-xs padding-left-xs">Turbo Cancel</span>
     </button>`;
     //$("#btnRefresh").parent().parent().append(thing0);
-    $("#btnRefresh").closest('ul').append(thing0);
+    $("#btnRefresh").closest('ul').append(thing);
 }
 
 if ((ticketStatus === "New") || (ticketStatus === "Resolved")) {
     // in process
-    var thing2 = document.createElement('li');
-    thing2.innerHTML = `<button id="inProcess" type="button" class="btn btn-holly btn-sm" title="InProcess">
+    var thing = document.createElement('li');
+    thing.innerHTML = `<button id="inProcess" type="button" class="btn btn-holly btn-sm" title="InProcess">
     <span class="hidden-xs padding-left-xs">In Process</span>
     </button>`;
-    $("#btnRefresh").closest('ul').append(thing2);
+    $("#btnRefresh").closest('ul').append(thing);
 
 }
 
@@ -189,27 +194,14 @@ $("#btnRefresh").closest('ul').append(thing1);
 // resolve
 // resolve should only be an option if the ticket status is In Process
 if ((ticketStatus === "In Process") || (ticketStatus === "New")) {
-    var thing3 = document.createElement('li');
-    thing3.innerHTML = `<button id="resolve" type="button" class="btn btn-holly btn-sm" title="Resolve">
+    var thing = document.createElement('li');
+    thing.innerHTML = `<button id="resolve" type="button" class="btn btn-holly btn-sm" title="Resolve">
     <span class="hidden-xs padding-left-xs">Resolve</span>
     </button>`;
-    $("#btnRefresh").closest('ul').append(thing3);
+    $("#btnRefresh").closest('ul').append(thing);
 }
 
 /* functions */
-
-//this never gets called
-function doIt(e) {
-
-    if (e.shiftKey) {
-        let g = e.target.innerText;
-        if (g !== undefined) {
-            e.preventDefault(); //lol
-
-        }
-    }
-
-}
 
 /* key handlers */
 
@@ -222,20 +214,25 @@ function key_down(e) {
     //if a match is already found, subsequent case clause values will not be evaluated, even when they will be visited by fall-through.
     switch (e.keyCode) {
         case 16: // 16 = shift key
-            console.log(" **** SHIFT DOWN ****");
+            //console.log(" **** SHIFT DOWN ****");
             //show the thing
             icon_div.style.display = 'block';
             break;
+        case 65: // 65 = 'a'
+            if (e.shiftKey) assign_to_me();
+            break;
         case 73: // 73 = 'i'
-            //in process
-            if (e.shiftKey) {
-                console.log("shift + i");
-            } else {
-                console.log("just i");
-            }
+            if (e.shiftKey) in_process();
+            break;
+        case 82: // 82 = 'r'
+            if (e.shiftKey) resolve();
+            break;
+        case 84: // 84 = 't'
+            if (e.shiftKey) turbo_cancel();
             break;
         default:
-            console.log("default key down block//");
+            //console.log("default key down block//");
+            var q = 42;
 
     }
 
@@ -245,7 +242,7 @@ function key_down(e) {
 function key_up(e) {
     //16 = shift key
     if (e.keyCode == 16) {
-        console.log(" **** SHIFT UP ****");
+        //console.log(" **** SHIFT UP ****");
         //hide the thing
         icon_div.style.display = 'none';
     }
@@ -306,6 +303,3 @@ if (document.getElementById("inProcess"))
 
 if (document.getElementById("resolve"))
     document.getElementById("resolve").addEventListener("click", resolve);
-
-
-//window.addEventListener("click", doIt);
