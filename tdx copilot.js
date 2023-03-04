@@ -17,17 +17,24 @@
 /* CSS + HTML payloads */
 
 //eff ewe
-let css=`.cornerIconDiv {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    cursor: none;
-    background-color: burlywood;
-    z-index: 100;
-    position: absolute;`;
+let css=`/* this is a comment to make the code line up in my IDE */
+    .cornerIconDiv {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 32px;
+        height: 32px;
+        cursor: none;
+        background-color: burlywood;
+        z-index: 100;
+        position: absolute;
+    }
+    .btn-secondary {
+        background-color: DeepPink;
+        border-color: FireBrick;
+        color: #fff;
+    }`;
 GM_addStyle(css);
 
 //create our new div
@@ -35,15 +42,21 @@ var icon_div = GM_addElement('div',
     { class: 'cornerIconDiv' }
 );
 
+var zero_span = GM_addElement(icon_div, 'span', { class: 'zeroSpan' } );
+var first_span = GM_addElement(icon_div, 'span', { class: 'firstSpan' } );
+//var $span = $( document.createElement('span') );
+//$span.addClass('folder_name').html('Elway');
+
 //add icon to the div
-var icon = GM_addElement(icon_div, 'img',
+var icon = GM_addElement(zero_span, 'img',
     // LONG LIVE IVBOR
     {
         src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAGNQTFRFj4W+XW97ZX2G7msA7mwIs3xb7XIb73MN8HQA8HUugpCWe5Od8nwC73s69YAJ84Ik9oQc9IQv+4kA9oc59Is++I0s+Y8XxJl4+pAk/JUL+ZU5/qQa/6Uo/6c1/qs+/atO/qxHv0Ao3QAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAABMElEQVQ4y7WS0ZKDIAxFo7SKSguNirqi9v+/chNdFbCzb804QyY5JDdBgNDqGv43pb4EnI2N+hCERqlmddzs6Fvdl5IPv7AGeLvD3gBPKbwWWiszOc8mI7MsUGE4PG8iqY8bZCST7o/LPsUyDmjDPPUfjd4BrRDxJwCo6KJZKQNa5j1iHwETX9TzOM6tzAEsYlSAj9Z1ZdnZnH0MVMwbMHdVVaV3GwAvRUYV+BjLCiBNUJCRzBsdD6gp8fwDXAiIFQhbpGmaRC0CkfaeUD7bgP46psxpOpuL7DLmtihJCUFvSESL0a551YpLMwCZvKyaHmvAdgfofvxYYIYtyAD1R8yDtDarvtOsFIWPKNbX90eaJsyE98s1xK+O5Wfe5i+OLbKdrrh9CPrmF/4SUBRR4Bd3/BoXPComPwAAAABJRU5ErkJggg==',
     }
 );
 
-var icon_i = GM_addElement(icon_div, 'img',
+//var icon_i = GM_addElement(icon_div, 'img',
+var icon_i = GM_addElement(first_span, 'img',
     {
         src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAA9QTFRFAAAAAAAAMDAwoKCg////aH9gHwAAAAF0Uk5TAEDm2GYAAAABYktHRACIBR1IAAAAQ0lEQVQoz2NgMEYBDAzMqAIGIAUuMOAMUmJsbAIXcIEIIPggJUQKGA8SAZchIoAR6hjxAhdxNoYJoEQuhgBGZKMnBwD7ingdHGtM+AAAAABJRU5ErkJggg==',
     }
@@ -77,10 +90,19 @@ switch(t) {
 
 /* remove useless Print button */
 
-//find the NoPrint div, then the button inside it, then hide that useless thing
-//$(".NoPrint").find("button:contains('Print View')").style.display = "none";
+//find the NoPrint button, then hide that useless thing
+$('button:contains("Print View")').hide();
 
 /* add better buttons */
+
+// TURBO CANCEL MONKEY-FIGHTER
+var thing = document.createElement ('li');
+// onclick="window.location.href = window.location.href;"
+thing.innerHTML = `<button id="turboCancel" type="button" class="btn btn-secondary btn-sm" title="TurboCancel">
+ <span class="hidden-xs padding-left-xs">Turbo Cancel</span>
+ </button>`;
+$("#btnRefresh").parent().parent().append(thing);
+
 
 //find NoPrint div, then divTabHeader, the the UL in it, then append an LI
 
@@ -150,9 +172,15 @@ function key_up(e) {
     }
 }
 
+//turbo cancel
+function turbo_cancel(e) {
+    console.log("turbo cancel");
+}
+
 /* event listeners */
 
 window.addEventListener("keydown", key_down);
 window.addEventListener("keyup", key_up);
 
+document.getElementById("turboCancel").addEventListener("click", turbo_cancel);
 //window.addEventListener("click", doIt);
