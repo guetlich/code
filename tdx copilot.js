@@ -92,6 +92,7 @@ switch(getCookie("copilot")) {
         setCookie("copilot", "toDetail", 1);
         $("#btnSubmit").closest('form').submit();
         break;
+        /*
     case 'assignToMee':
         //setCookie("copilot", "editAssignToMe", 1);
         //$('button:contains("Edit")').click();
@@ -107,6 +108,7 @@ switch(getCookie("copilot")) {
         //$('#upMyWork').click();
         //$("#btnSubmit").closest('form').submit();
         break;
+        */
     case 'inProcess':
         console.log("in process do something");
         setCookie("copilot", "editInProcess", 1);
@@ -148,7 +150,7 @@ switch(getCookie("copilot")) {
 
 /* remove useless Print button */
 
-//find the NoPrint button, then hide that useless boomer thing
+//find the NoPrint button, then hide that useless boomer piece of crap
 $('button:contains("Print View")').hide();
 
 /* add better buttons */
@@ -260,7 +262,7 @@ function turbo_cancel(e) {
 
 //assign to me
 function assign_to_me(e) {
-    console.log("entry assign to me");
+    //console.log("entry assign to me");
     //setCookie("copilot", "assignToMe", 1);
     //prevent alert box
     /*
