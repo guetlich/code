@@ -32,7 +32,7 @@ let css=`/* this is a comment to make the code line up in my IDE */
         z-index: 100;
         position: absolute;
     }
-    .btn-secondary {
+    .btn-holly {
         background-color: DeepPink;
         border-color: FireBrick;
         color: #fff;
@@ -162,7 +162,7 @@ $('button:contains("Print View")').hide();
 //turbo cancel & in process should only be an option if the ticket status is new
 if (ticketStatus === "New") {
     var thing0 = document.createElement('li');
-    thing0.innerHTML = `<button id="turboCancel" type="button" class="btn btn-secondary btn-sm" title="TurboCancel">
+    thing0.innerHTML = `<button id="turboCancel" type="button" class="btn btn-holly btn-sm" title="TurboCancel">
     <span class="hidden-xs padding-left-xs">Turbo Cancel</span>
     </button>`;
     //$("#btnRefresh").parent().parent().append(thing0);
@@ -172,7 +172,7 @@ if (ticketStatus === "New") {
 if ((ticketStatus === "New") || (ticketStatus === "Resolved")) {
     // in process
     var thing2 = document.createElement('li');
-    thing2.innerHTML = `<button id="inProcess" type="button" class="btn btn-secondary btn-sm" title="InProcess">
+    thing2.innerHTML = `<button id="inProcess" type="button" class="btn btn-holly btn-sm" title="InProcess">
     <span class="hidden-xs padding-left-xs">In Process</span>
     </button>`;
     $("#btnRefresh").closest('ul').append(thing2);
@@ -181,7 +181,7 @@ if ((ticketStatus === "New") || (ticketStatus === "Resolved")) {
 
 // assign to me
 var thing1 = document.createElement('li');
-thing1.innerHTML = `<button id="assignToMe" type="button" class="btn btn-secondary btn-sm" title="AssignToMe">
+thing1.innerHTML = `<button id="assignToMe" type="button" class="btn btn-holly btn-sm" title="AssignToMe">
  <span class="hidden-xs padding-left-xs">Assign to Me</span>
  </button>`;
 $("#btnRefresh").closest('ul').append(thing1);
@@ -190,7 +190,7 @@ $("#btnRefresh").closest('ul').append(thing1);
 // resolve should only be an option if the ticket status is In Process
 if ((ticketStatus === "In Process") || (ticketStatus === "New")) {
     var thing3 = document.createElement('li');
-    thing3.innerHTML = `<button id="resolve" type="button" class="btn btn-secondary btn-sm" title="Resolve">
+    thing3.innerHTML = `<button id="resolve" type="button" class="btn btn-holly btn-sm" title="Resolve">
     <span class="hidden-xs padding-left-xs">Resolve</span>
     </button>`;
     $("#btnRefresh").closest('ul').append(thing3);
