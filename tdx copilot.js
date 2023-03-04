@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TDX Copilot
 // @namespace    https://it.cornell.edu/
-// @version      8
+// @version      9
 // @description  TDX Copilot
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID*
@@ -90,37 +90,24 @@ console.log("*** i think your name is " + getCookie("copilot_name"));
 //console.log("**** current status = " + currentStatus);
 
 switch(getCookie("copilot")) {
+
     case 'turboCancel':
         setCookie("copilot", "editTurboCancel", 1);
         $('button:contains("Edit")').click();
         break;
+
     case 'editTurboCancel':
         $('select[name="attribute40"]').val('89');
         setCookie("copilot", "toDetail", 1);
         $("#btnSubmit").closest('form').submit();
         break;
-        /*
-    case 'assignToMee':
-        //setCookie("copilot", "editAssignToMe", 1);
-        //$('button:contains("Edit")').click();
-        //break;
-    //case 'editAssignToMe':
-        ////magic happens
 
-        //we don't need to notify ourselves
-        //$('[name="Item.NotifyResponsible"]').prop( "checked", false );
-        //setCookie("copilot", "toDetail", 1);
-
-        $('#btnActions').click();
-        //$('#upMyWork').click();
-        //$("#btnSubmit").closest('form').submit();
-        break;
-        */
     case 'inProcess':
         console.log("in process do something");
         setCookie("copilot", "editInProcess", 1);
         $('button:contains("Edit")').click();
         break;
+
     case 'editInProcess':
         //we are now on the edit page, and need to in process this
         console.log("edit page in process");
@@ -130,22 +117,27 @@ switch(getCookie("copilot")) {
         //lastly submit
         $("#btnSubmit").closest('form').submit();
         break;
+    
     case 'resolve':
         setCookie("copilot", "editResolve", 1);
         $('button:contains("Edit")').click();
         break;
+
     case 'editResolve':
         $('select[name="attribute40"]').val('87');
         setCookie("copilot", "toDetail", 1);
         $("#btnSubmit").closest('form').submit();
         break;
+
     case 'toDetail':
         setCookie("copilot", "", 0);
         $('button:contains("To Detail")').click();
         break;
+
     case '':
         //console.log("do nothing");
         break;
+
     default:
         console.log("!! destroy the cookie !!");
         setCookie("copilot", "", 0);
@@ -259,14 +251,6 @@ function turbo_cancel(e) {
 
 //assign to me
 function assign_to_me(e) {
-    //console.log("entry assign to me");
-    //setCookie("copilot", "assignToMe", 1);
-    //prevent alert box
-    /*
-    $('#btnTakeTicket').prop("onclick", null);//.off("click"); //oy
-    $('#btnActions').click();
-    $('#btnTakeTicket').click();
-    */
     __doPostBack('btnTakeTicket','');
     //location.reload();
 }
