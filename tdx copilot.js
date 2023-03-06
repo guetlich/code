@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TDX Copilot
 // @namespace    https://it.cornell.edu/
-// @version      10
+// @version      11
 // @description  TDX Copilot
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID*
@@ -17,6 +17,8 @@
 // ==/UserScript==
 
 /* CSS + HTML payloads */
+
+//onclick="window.location.href = window.location.href;"
 
 //eff ewe
 let css=`/* this is a comment to make the code line up in my IDE */
@@ -266,7 +268,8 @@ function assign_to_me(e) {
 function resolve(e) {
     console.log("entry resolve function");
     setCookie("copilot", "resolve", 1);
-    location.reload();
+    //location.reload();
+    window.location.href = window.location.href;
 }
 
 //in process
