@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TDX Copilot
 // @namespace    https://it.cornell.edu/
-// @version      9
+// @version      10
 // @description  TDX Copilot
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID*
@@ -193,6 +193,13 @@ if ((ticketStatus === "In Process") || (ticketStatus === "New")) {
     $("#btnRefresh").closest('ul').append(thing);
 }
 
+//update button
+var thing2 = document.createElement('li');
+thing2.innerHTML = `<button id="update" type="button" class="btn btn-holly btn-sm" title="Update">
+ <span class="hidden-xs padding-left-xs">Update</span>
+ </button>`;
+$("#btnRefresh").closest('ul').append(thing2);
+ 
 /* functions */
 
 /* key handlers */
@@ -269,6 +276,10 @@ function in_process(e) {
     location.reload();
 }
 
+//update
+function update(e) {
+    $("#btnUpdateTicket").click();
+}
 
 /* event listeners */
 
@@ -287,3 +298,6 @@ if (document.getElementById("inProcess"))
 
 if (document.getElementById("resolve"))
     document.getElementById("resolve").addEventListener("click", resolve);
+
+if (document.getElementById("update"))
+    document.getElementById("update").addEventListener("click", update);
