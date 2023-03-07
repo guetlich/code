@@ -55,6 +55,7 @@ var zero_span = GM_addElement(icon_div, 'span', { class: 'hSpan' } );
 var spans = [];
 const tutes = [
     '<ctrl> + a : Assign to yourself',
+    '<ctrl> + h : Go Home',
     '<ctrl> + i : Set In Process',
     '<ctrl> + r:  Refresh',
     '<ctrl> + <shift> + r : Resolve',
@@ -228,6 +229,9 @@ function key_down(e) {
         case 65: // 65 = 'a'
             if (e.ctrlKey) assign_to_me();
             break;
+        case 72: // 72 = 'h'
+            if (e.ctrlKey) home();
+            break;
         case 73: // 73 = 'i'
             if (e.ctrlKey) in_process();
             break;
@@ -303,6 +307,11 @@ function update(e) {
 //save 
 function save(e) {
     $("#btnSubmit").click();
+}
+
+//home
+function home(e) {
+    window.location.href = "https://tdx.cornell.edu/TDNext/Home/Desktop/Default.aspx"
 }
 
 /* event listeners */
