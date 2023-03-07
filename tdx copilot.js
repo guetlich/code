@@ -76,6 +76,8 @@ var icon = GM_addElement(zero_span, 'img',
     }
 );
 
+/* generate factoids */
+
 /* where are we, and we are we doing right now? */
 //TODO: learn a better way to do this : )
 //eventually everything turns into a FSM
@@ -85,14 +87,18 @@ var icon = GM_addElement(zero_span, 'img',
 var ticketStatus = $('#thTicket_lblStatus').html();
 
 //say my name
-//var whoami = getCookie("copilot_name");
-
 if (! getCookie("copilot_name")) {
     //attempt to find out
     var whoami = $('span[title="Me"]').parent().text().trim();
     setCookie("copilot_name", whoami, 2); //sneaky
 } 
 console.log("*** i think your name is " + getCookie("copilot_name"));
+
+//am i looking at a ticket?
+//who is responsible for it?
+if (getElementById('divResponsibility')) {
+    var qq = 4242; //noop
+}
 
 //console.log("**** current status = " + currentStatus);
 
