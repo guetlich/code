@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         TDX Copilot
 // @namespace    https://it.cornell.edu/
-// @version      11
+// @version      12
 // @description  TDX Copilot
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet?TicketID*
 // @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/Edit?TicketID=*
+// @match        https://tdx.cornell.edu/TDNext/Apps/32/Tickets/TicketDet.aspx?TicketID=*
 // @match        https://tdx.cornell.edu/TDNext/Home/Desktop/Default.aspx
 // @require      https://raw.githubusercontent.com/guetlich/code/main/support/waitForKeyElements.js
 // @require      https://raw.githubusercontent.com/guetlich/code/main/support/cookies.js
@@ -53,10 +54,13 @@ var zero_span = GM_addElement(icon_div, 'span', { class: 'hSpan' } );
 
 var spans = [];
 const tutes = [
-    '<shift> + a : Assign to yourself',
-    '<shift> + i : Set In Process',
-    '<shift> + r : Resolve',
-    '<shift> + t : Turbo Cancel',
+    '<ctrl> + a : Assign to yourself',
+    '<ctrl> + i : Set In Process',
+    '<ctrl> + r:  Refresh',
+    '<ctrl> + <shift> + r : Resolve',
+    '<ctrl> + s : Save',
+    '<ctrl> + t : Turbo Cancel',
+    '<ctrl> + u : Update',
 ]
 
 for (var i=0; i<tutes.length; i++) {
@@ -214,23 +218,33 @@ function key_down(e) {
 
     //if a match is already found, subsequent case clause values will not be evaluated, even when they will be visited by fall-through.
     switch (e.keyCode) {
+        // ctrl + shift => show help overlay
         case 16: // 16 = shift key
-            //console.log(" **** SHIFT DOWN ****");
-            //show the thing
-            icon_div.style.display = 'block';
+        case 17: // 17 = ctrl
+            if (e.ctrlKey && e.shiftKey) {
+                icon_div.style.display = 'block';
+            }
             break;
         case 65: // 65 = 'a'
-            if (e.shiftKey) assign_to_me();
+            if (e.ctrlKey) assign_to_me();
             break;
         case 73: // 73 = 'i'
-            if (e.shiftKey) in_process();
+            if (e.ctrlKey) in_process();
             break;
         case 82: // 82 = 'r'
-            if (e.shiftKey) resolve();
+            if (e.ctrlKey && e.shiftKey) { resolve(); break; }
+            if (e.ctrlKey && !e.shiftKey) { window.location.href = window.location.href; break; }
+            break;
+        case 83: // 83 = 's'
+            if (e.ctrlKey) save();
             break;
         case 84: // 84 = 't'
-            if (e.shiftKey) turbo_cancel();
+            if (e.ctrlKey) turbo_cancel();
             break;
+        case 85: // 85 = 'u'
+            if (e.ctrlKey) update();
+            break;
+        
         default:
             //console.log("default key down block//");
             var q = 42;
@@ -242,7 +256,7 @@ function key_down(e) {
 // shift up
 function key_up(e) {
     //16 = shift key
-    if (e.keyCode == 16) {
+    if ((e.keyCode == 16) || (e.keyCode == 17)) {
         //console.log(" **** SHIFT UP ****");
         //hide the thing
         icon_div.style.display = 'none';
@@ -255,7 +269,8 @@ function key_up(e) {
 function turbo_cancel(e) {
     console.log("entry turbo cancel");
     setCookie("copilot", "turboCancel", 1);
-    location.reload();
+    //location.reload();
+    window.location.href = window.location.href;
 }
 
 //assign to me
@@ -276,12 +291,18 @@ function resolve(e) {
 function in_process(e) {
     console.log("entry in_process function");
     setCookie("copilot", "inProcess", 1);
-    location.reload();
+    //location.reload();
+    window.location.href = window.location.href;
 }
 
 //update
 function update(e) {
     $("#btnUpdateTicket").click();
+}
+
+//save 
+function save(e) {
+    $("#btnSubmit").click();
 }
 
 /* event listeners */
