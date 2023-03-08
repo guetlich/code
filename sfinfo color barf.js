@@ -21,16 +21,23 @@ const stuff = document.getElementsByTagName("td");
   
 for (var i=0; i<stuff.length; i++) 
     if ((stuff[i].innerText.endsWith(":")) || (stuff[i].cellIndex == 0))
-        if (!stuff[i].bgColor)
+        if (!(stuff[i].innerText == ''))
             stuff[i].bgColor = colours[c++ % colours.length];
+                    //if ((!stuff[i].bgColor) && !(stuff[i].innerText == ''))
+        //(!stuff[i].innerText.isEmpty()))
 
-/*
+
+
 
 const headers = document.getElementsByTagName("th");
 
-for (var j=0; j<headers.length; j++)
-    if (headers[j].rowIndex == 0)
-        if (!headers[j].bgColor)
-            headers[j].bgColor = colours[c++ % colours.length];
+for (var j=0; j<headers.length; j++) {
+    //BurlyWood yay
+    headers[j].bgColor = "BurlyWood";
+}
 
-*/
+//for (var j=0; j<headers.length; j++)
+  //  if (headers[j].rowIndex == 0)
+    //    if (!headers[j].bgColor)
+      //      headers[j].bgColor = colours[c++ % colours.length];
+
