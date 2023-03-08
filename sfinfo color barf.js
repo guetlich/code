@@ -24,9 +24,13 @@ for (var i=0; i<stuff.length; i++)
         if (!stuff[i].bgColor)
             stuff[i].bgColor = colours[c++ % colours.length];
 
+/*
+
 const headers = document.getElementsByTagName("th");
 
 for (var j=0; j<headers.length; j++)
     if (headers[j].rowIndex == 0)
         if (!headers[j].bgColor)
             headers[j].bgColor = colours[c++ % colours.length];
+
+*/
