@@ -10,4 +10,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 
-$('select[name="vmid"]').attr('size', 20);
+var a = $('select[name="vmid"]');
+//only fix this is there is only one form visibile
+if (a.length == 1)
+    a.attr('size', 20);
