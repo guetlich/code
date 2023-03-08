@@ -14,10 +14,7 @@
 
 //$('input[name="needle"]').focus();
 
-var q = Element.getElementsByTagName("ul");
+//var q = document.getElementsByTagName("ul");
 
-if (q.length == 1) {
-    var r = q.children();
-    console.log ("*******" + r.length);
-}
-//window.getElementsByTagName
+$(".col-xs-12").closest("ul").closest("li").closest("a").click();
+
