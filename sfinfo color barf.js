@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Colour Barf
 // @namespace    https://it.cornell.edu/
-// @version      8
+// @version      9
 // @description  Make SFInfo look like a rainbow threw up on it
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -19,15 +19,15 @@ var c = 0;
 
 const stuff = document.getElementsByTagName("td");
   
-for (var i=0; i<stuff.length; i++) 
-    if ((stuff[i].innerText.endsWith(":")) || (stuff[i].cellIndex == 0))
-        if (!(stuff[i].innerText == ''))
+for (var i=0; i<stuff.length; i++) {
+    if ((stuff[i].innerText.endsWith(":")) || (stuff[i].cellIndex == 0)) {
+        if (! /^\s*$/.test(stuff[i].innerText)) {
             stuff[i].bgColor = colours[c++ % colours.length];
-                    //if ((!stuff[i].bgColor) && !(stuff[i].innerText == ''))
-        //(!stuff[i].innerText.isEmpty()))
-
-
-
+        } else {
+            ;
+        }
+    }
+}
 
 const headers = document.getElementsByTagName("th");
 
@@ -35,9 +35,3 @@ for (var j=0; j<headers.length; j++) {
     //BurlyWood yay
     headers[j].bgColor = "BurlyWood";
 }
-
-//for (var j=0; j<headers.length; j++)
-  //  if (headers[j].rowIndex == 0)
-    //    if (!headers[j].bgColor)
-      //      headers[j].bgColor = colours[c++ % colours.length];
-
