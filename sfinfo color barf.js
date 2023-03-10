@@ -14,7 +14,8 @@ let css=`th, td {
     padding: 2px;}`
 GM_addStyle(css);
 
-const colours = ["Tomato", "Orange", "Yellow", "ForestGreen", "CornflowerBlue", "Plum", "Orchid"];
+//const colours = ["Tomato", "Orange", "Yellow", "ForestGreen", "CornflowerBlue", "Plum", "Orchid"];
+const colours = ["Tomato", "Orange", "Yellow", "LightGreen", "CornflowerBlue", "Plum", "Orchid"];
 var c = 0;
 
 const stuff = document.getElementsByTagName("td");
