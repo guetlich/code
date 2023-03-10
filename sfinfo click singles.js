@@ -10,19 +10,8 @@
 // @run-at       document-idle
 // ==/UserScript==
 
-
-
-//$('input[name="needle"]').focus();
-
-//var q = document.getElementsByTagName("ul");
-
-//$(".col-xs-12").closest("ul").closest("li").closest("a").click();
-
-//count the number of a hrefs
-//count the number of a hrefs that have text that looks like vserver blah blah blah
-//if there is only one of those, click it
 var a = [];
 a = $("a[href*='vserver.php']");
-//console.log(a.length);
+
 if (a.length == 1)
     a[0].click();
