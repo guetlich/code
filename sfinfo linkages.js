@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Linkages
 // @namespace    https://it.cornell.edu/
-// @version      22
+// @version      23
 // @description  Add context-based clickable linkages to SFInfo
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -16,7 +16,7 @@ let css=`/* this is a comment to make the code line up in my IDE */
     .cornerIconDiv {
         //in another times forgotten space
         //width:207px;
-        margin:17px;
+        margin:8px;
         //float:right;
         //top:-44px;
         display: none;
