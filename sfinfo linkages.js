@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Linkages
 // @namespace    https://it.cornell.edu/
-// @version      5
+// @version      16
 // @description  Add context-based clickable linkages to SFInfo
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -23,7 +23,6 @@ let css=`/* this is a comment to make the code line up in my IDE */
         right: 0;
         width: 207px;
         height: 335px;
-        cursor: none;
         z-index: auto;
         position: absolute;
     }
@@ -33,14 +32,18 @@ let css=`/* this is a comment to make the code line up in my IDE */
 GM_addStyle(css);
 
 var icon_div = GM_addElement('div',
-    { class: 'cornerIconDiv' }
-);
+    { /* comment */
+      class: 'cornerIconDiv' 
+      id: 'aws'
+    });
+
 
 
 //create a span
 var icon_span = GM_addElement(icon_div, 'span', { class: 'hSpan' } );
 
-
+//icon_span.append("<a href='https://cornell-sso.awsapps.com/start'>");
+//$('#aws').click(function() {})
 var icon = GM_addElement(icon_span, 'img',
     // LONG LIVE IVBOR
     {
@@ -49,10 +52,15 @@ var icon = GM_addElement(icon_span, 'img',
     }
 );
 
-var a = icon.innerHTML();
-icon.innerHTML("<a href='https://cornell-sso.awsapps.com/start'>" + a + "</a>");
+icon.addEventListener("click", () => {
+    document.location = 'https://cornell-sso.awsapps.com/start';
+});
+
+//icon_span.append("</a>");
+//var a = icon.innerHTML();
+//icon.innerHTML("<a href='https://cornell-sso.awsapps.com/start'>" + a + "</a>");
 
 
-if (/Parent\ Entity:\s*?Amazon/i.test(document.body.innerHTML)) {
+if (/Parent\ Entity.*?Amazon/i.test(document.body.innerHTML)) {
     icon_div.style.display = 'block';
 }
