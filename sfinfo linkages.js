@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Linkages
 // @namespace    https://it.cornell.edu/
-// @version      18
+// @version      19
 // @description  Add context-based clickable linkages to SFInfo
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
