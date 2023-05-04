@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SFInfo Linkages
 // @namespace    https://it.cornell.edu/
-// @version      4
+// @version      5
 // @description  Add context-based clickable linkages to SFInfo
 // @author       Holly Klimowicz <hek52@cornell.edu>
 // @match        https://sfinfo.cit.cornell.edu/*
@@ -49,7 +49,10 @@ var icon = GM_addElement(icon_span, 'img',
     }
 );
 
+var a = icon.innerHTML();
+icon.innerHTML("<a href='https://cornell-sso.awsapps.com/start'>" + a + "</a>");
 
-if (/Parent\ Entity.*?Amazon/i.test (document.body.innerHTML) ) {
+
+if (/Parent\ Entity:\s*?Amazon/i.test(document.body.innerHTML)) {
     icon_div.style.display = 'block';
 }
