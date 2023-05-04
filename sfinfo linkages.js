@@ -18,13 +18,13 @@ let css=`/* this is a comment to make the code line up in my IDE */
         //margin:37px;
         //float:right;
         //top:-44px;
-        display: block;
+        display: none;
         top: 0;
         right: 0;
         width: 207px;
         height: 335px;
         cursor: none;
-        z-index: 100;
+        z-index: auto;
         position: absolute;
     }
     .hSpan {
@@ -49,9 +49,6 @@ var icon = GM_addElement(icon_span, 'img',
 );
 
 
-
-var thing = document.createElement('li');
-    thing.innerHTML = `<button id="inProcess" type="button" class="btn btn-holly btn-sm" title="InProcess">
-    <span class="hidden-xs padding-left-xs">In Process</span>
-    </button>`;
-    $("#btnRefresh").closest('ul').append(thing);
+if (/Parent\ Entity.*?Amazon/i.test (document.body.innerHTML) ) {
+    icon_div.style.display = 'block';
+}
