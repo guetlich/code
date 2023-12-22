@@ -84,3 +84,24 @@ if (/Parent\ Entity.*?Amazon/i.test(document.body.innerHTML)) {
 if (/Parent\ Entity.*?Azure/i.test(document.body.innerHTML)) {
     azure_div.style.display = 'block';
 }
+
+// Facts
+var cells = document.getElementsByTagName("td");
+var hostId = null;
+var zoneId = null;
+
+// "Host ID:"
+var regex1 = /Host\ ID:/(.*)$/;
+
+// "Zone ID:" 
+var regex2 = /Zone\ ID:/(.*)$/;
+
+for (var i=0,imax=cells.length; i<imax; i++) {
+    if (regex1.test(cells[i].innerText)) { hostID = "$1"; }
+    if (regex2.test(cells[i].innerText)) { zoneID = "$1"; }
+}
+
+console.log("hostid: " + $hostId);
+console.log("hostid: " + $zoneId);
+
+

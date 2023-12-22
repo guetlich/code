@@ -11,7 +11,7 @@
 // @run-at document-idle
 // ==/UserScript==
 
-//waitForKeyElements('input[id="idSIButton9"]', doNext);
+waitForKeyElements('img', doNext);
 $('img').on({
     'click': function() {
         /score_.*\.svg/.test($(this).attr('src'))
@@ -19,3 +19,16 @@ $('img').on({
             : 'img1_on.jpg';
     }
 });
+
+function copy_this(e) {
+
+    if (e.shiftKey) { 
+        let g = ;
+        if (g !== undefined) { 
+            e.preventDefault(); //lol
+            window.getSelection().empty(); //double lol
+            GM_setClipboard(g.trim(), 'text/plain');
+        }
+    }
+
+window.addEventListener("click", copy_this);
