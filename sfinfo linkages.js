@@ -91,14 +91,14 @@ var hostId = null;
 var zoneId = null;
 
 // "Host ID:"
-var regex1 = /Host\ ID:/(.*)$/;
+var regex1 = /Host\ ID:(.*)$/;
 
 // "Zone ID:" 
-var regex2 = /Zone\ ID:/(.*)$/;
+var regex2 = /Zone\ ID:(.*)$/;
 
 for (var i=0,imax=cells.length; i<imax; i++) {
-    if (regex1.test(cells[i].innerText)) { hostID = "$1"; }
-    if (regex2.test(cells[i].innerText)) { zoneID = "$1"; }
+    if (regex1.test(cells[i].innerText)) { hostId = "$1".trim(); }
+    if (regex2.test(cells[i].innerText)) { zoneId = "$1".trim(); }
 }
 
 console.log("hostid: " + $hostId);
